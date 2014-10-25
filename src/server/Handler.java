@@ -5,19 +5,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
+
 import utils.*;
 
 class Handler extends Thread {
-    private String name;
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
     private Message message;
+    private HashMap<String, ClientGroup> clientMap = new HashMap<String, ClientGroup>(); 
     public Handler(Socket socket) {
         this.socket = socket;
     }
+    public List<PrintWriter> writers;
 
     /**
      * Services this thread's client by repeatedly requesting a
@@ -35,7 +37,6 @@ class Handler extends Thread {
             out = new PrintWriter(socket.getOutputStream(), true);
             //this is a thread for the client.
             //do things here for a new client connection;
-            
 
             // Accept messages from this client and handle
             while (true) {
@@ -45,14 +46,30 @@ class Handler extends Thread {
                 }
                 message = new Message(input);
                 //do this when a message is received
-                for (PrintWriter writer : writers) {
-                    writer.println("MESSAGE " + name + ": " + input);
+                if (message.getMessage().equals("auth")){
+                	if (clientMap.containsKey(message.getID())){
+                		clientMap.get(message.getID()).add(out);
+                	} else {
+                		clientMap.put(message.getID(),new ClientGroup(message.getID()));
+                	}
+                } else if (clientMap.containsKey(message.getID())){
+                	writers = clientMap.get(message.getID()).getWriters();
+                    //get all the client writers and distribute the clip
+                    for (PrintWriter writer : writers) {
+                    	//this will write a duplicate back to the sender.
+                    	//fix this later :P
+                        writer.println(message.getMessage());
+                    }
+                } else {
+                	
                 }
             }
         } catch (IOException e) {
             System.out.println(e);
         } finally {
             //Do things at the end?
+        	
+        	//remove the client from the clientlist
             try {
                 socket.close();
             } catch (IOException e) {
