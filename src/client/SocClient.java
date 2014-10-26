@@ -41,6 +41,7 @@ public class SocClient {
         while (true) {
             String line = input.readLine();
             System.out.println("[" + System.currentTimeMillis() / 1000l + "] " + line);
+            ClientHelper.getHelper().setIg(true);
             manager.setClipboardContents(line);
         }
     }
