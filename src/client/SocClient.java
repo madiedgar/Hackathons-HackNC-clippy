@@ -44,7 +44,7 @@ public class SocClient {
             String line = input.readLine();
             System.out.println(line);
             manager.setClipboardContents(line);
-            ClipListener.setIgnore();
+            ClientHelper.getHelper().setIg(true);
         }
     }
     

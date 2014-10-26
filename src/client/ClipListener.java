@@ -45,18 +45,14 @@ public class ClipListener extends Thread implements ClipboardOwner{
 		}
 
 	private void processContents(Transferable content) {
-		if (!manager.getClipboardContents().equals(last) || ignore == false){
+		if (!manager.getClipboardContents().equals(last) || ClientHelper.getHelper().getIgnore() == false){
 		out.println(id + "." + manager.getClipboardContents());
 		last = manager.getClipboardContents();
-		} else ignore = false;
+		} else ClientHelper.getHelper().setIg(false);
 	}
 
 	private void regainOwnership(Transferable content) {
 		board.setContents(content, this); 
-	}
-
-	public static void setIgnore() {
-		ignore = true;
 	}
 
 }
