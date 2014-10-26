@@ -1,18 +1,19 @@
 package server;
 
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ClientGroup {
 	
-	private List<PrintWriter> writers;
+	private ArrayList<PrintWriter> writers;
 	private String id;
 	
 	public ClientGroup(String id){
 		this.id = id;
+		writers = new ArrayList<PrintWriter>();
 	}
 
-	public List<PrintWriter> getWriters() {
+	public ArrayList<PrintWriter> getWriters() {
 		// TODO Auto-generated method stub
 		return writers;
 	}
