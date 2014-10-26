@@ -10,9 +10,9 @@ public class DBwrangler {
 	private static DBwrangler db;
 	private static Connection conn;
 	
-//	private DBwrangler(){
-//		//init();
-//	}
+	private DBwrangler(){
+		init();
+	}
 	
 	public static DBwrangler getWrangler(){
 		if (db != null){
