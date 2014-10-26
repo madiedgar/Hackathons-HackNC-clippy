@@ -21,5 +21,8 @@ public class ClientGroup {
 	public void add(PrintWriter out) {
 		writers.add(out);
 	}
+	public String getID(){
+		return id;
+	}
 
 }

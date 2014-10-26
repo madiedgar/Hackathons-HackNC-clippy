@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
@@ -15,7 +16,8 @@ class Handler extends Thread {
     private BufferedReader in;
     private PrintWriter out;
     private Message message;
-    private HashMap<String, ClientGroup> clientMap = new HashMap<String, ClientGroup>(); 
+    private String id;
+   
     public Handler(Socket socket) {
         this.socket = socket;
     }
@@ -27,7 +29,9 @@ class Handler extends Thread {
      * acknowledges the name and registers the output stream for
      * the client in a global set, then repeatedly gets inputs and
      * broadcasts them.
+     * @return 
      */
+    
     public void run() {
         try {
 
@@ -45,27 +49,36 @@ class Handler extends Thread {
                     return;
                 }
                 message = new Message(input);
+                id = message.getID();
+                System.out.println(id);
+                ClientGroup g = HandlerHelper.findGroup(id);
                 //do this when a message is received
                 if (message.getMessage().equals("auth")){
-                	if (clientMap.containsKey(message.getID())){
-                		clientMap.get(message.getID()).add(out);
-                	} else {
-                		clientMap.put(message.getID(),new ClientGroup(message.getID()));
-                		System.out.println("New Client!");
-                		System.out.println(out);
-                		clientMap.get(message.getID()).add(out);
-                	}
-                } else if (clientMap.containsKey(message.getID())){
-                	writers = clientMap.get(message.getID()).getWriters();
+                	
+                	if (g == null){
+                		ClientGroup g1 = new ClientGroup(id);
+                		g1.add(out);
+                		HandlerHelper.groupAdd(g1);
+                		
+                	} else g.add(out);
+//                	if (clientMap.containsKey(id)){
+//                		clientMap.get(id).add(out);
+//                		System.out.println(id + " id");
+//                	} else {
+//                		clientMap.put(id,new ClientGroup(message.getID()));
+//                		System.out.println("New Client!");
+//                		System.out.println(out + " out");
+//                		clientMap.get(id).add(out);
+//                	}
+                } else {
+                	writers = g.getWriters();
                     //get all the client writers and distribute the clip
                 	DBwrangler.getWrangler().dbPut(message.getMessage(), message.getID());
-                    for (PrintWriter writer : writers) {
+                    for (PrintWriter w : writers) {
                     	//this will write a duplicate back to the sender.
-                    	//fix this later :P
-                        writer.println(message.getMessage());
+                    	System.out.println(w + " writer");
+                        w.println(message.getMessage());
                     }
-                } else {
-                	
                 }
             }
         } catch (IOException e) {
