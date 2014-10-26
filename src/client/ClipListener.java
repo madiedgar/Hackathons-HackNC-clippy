@@ -9,6 +9,7 @@ public class ClipListener extends Thread implements ClipboardOwner{
 	ClipManager manager;
 	PrintWriter out;
 	String id;
+	String last;
 	
 	public ClipListener(PrintWriter out, String id) {
 		manager = new ClipManager();
@@ -43,8 +44,10 @@ public class ClipListener extends Thread implements ClipboardOwner{
 		}
 
 	private void processContents(Transferable content) {
-		System.out.println("Processing: " + content);
+		if (!manager.getClipboardContents().equals(last)){
 		out.println(id + "." + manager.getClipboardContents());
+		last = manager.getClipboardContents();
+		}
 	}
 
 	private void regainOwnership(Transferable content) {
