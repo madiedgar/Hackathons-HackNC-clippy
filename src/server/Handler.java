@@ -51,6 +51,7 @@ class Handler extends Thread {
                 		clientMap.get(message.getID()).add(out);
                 	} else {
                 		clientMap.put(message.getID(),new ClientGroup(message.getID()));
+                		System.out.println("New Client!");
                 	}
                 } else if (clientMap.containsKey(message.getID())){
                 	writers = clientMap.get(message.getID()).getWriters();
