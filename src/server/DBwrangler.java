@@ -21,7 +21,7 @@ public class DBwrangler {
 	}
 	
 	private static void init(){
-		  String url = "jdbc:mysql://clippy.redspin.net:3306/";
+		  String url = "jdbc:mysql://127.0.0.1:3306/";
 		  String dbName = "clippy";
 		  String driver = "com.mysql.jdbc.Driver";
 		  String userName = "clippy"; 
