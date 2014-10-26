@@ -16,7 +16,7 @@ public class BoardListener extends ClipboardHandler{
 		}
 		);
 		try {
-			Thread.sleep(1000000L);
+			Thread.sleep(10000000L);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -24,7 +24,7 @@ public class BoardListener extends ClipboardHandler{
 	}
 
 	public void start() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
