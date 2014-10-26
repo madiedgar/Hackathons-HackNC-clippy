@@ -3,10 +3,11 @@ package client;
 import java.awt.*;
 import java.awt.datatransfer.*;
 
-public class ClipboardHandler implements ClipboardOwner{
+public class ClipListener extends Thread implements ClipboardOwner{
 	Clipboard board = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 	public void run() {  
+		
 		Transferable trans = board.getContents(this);  
 		regainOwnership(trans);  
 		System.out.println("Listening to board...");  
@@ -27,10 +28,5 @@ public class ClipboardHandler implements ClipboardOwner{
 	private void regainOwnership(Transferable content) {
 		board.setContents(content, this); 
 	}
-
-	public static void main(String[] args) {  
-	    BoardListener b = new BoardListener();  
-	    b.start();  
-	  } 
 
 }
