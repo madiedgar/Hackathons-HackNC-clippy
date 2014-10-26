@@ -44,7 +44,7 @@ public class ClipListener extends Thread implements ClipboardOwner{
 		}
 
 	private void processContents(Transferable content) {
-		if (!(manager.getClipboardContents().equals(ClientHelper.getHelper().getLast())) || !ClientHelper.getHelper().getIgnore()){
+		if (!(manager.getClipboardContents().equals(ClientHelper.getHelper().getLast())) && !ClientHelper.getHelper().getIgnore()){
 			out.println(id + "." + manager.getClipboardContents());
 		}
 		ClientHelper.getHelper().setLast(manager.getClipboardContents());
