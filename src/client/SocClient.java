@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
  * Trivial client for the date server.
  */
 public class SocClient {
-
+	
+	private ClipManager manager;
+	//manager.getClipboardContents()
+	//manager.setClipboardContents()
     /**
      * Runs the client as an application.  First it displays a dialog
      * box asking for the IP address or hostname of a host running
@@ -22,6 +25,7 @@ public class SocClient {
      */
     public static void main(String[] args) throws IOException {
     	Scanner scanner = new Scanner(System.in);
+    	ClipManager textTransfer = new ClipManager();
         String serverAddress = JOptionPane.showInputDialog(
             "Enter IP Address of a machine that is\n" +
             "running the date service on port 9090:");

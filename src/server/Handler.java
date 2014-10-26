@@ -56,6 +56,7 @@ class Handler extends Thread {
                 } else if (clientMap.containsKey(message.getID())){
                 	writers = clientMap.get(message.getID()).getWriters();
                     //get all the client writers and distribute the clip
+                	DBwrangler.getWrangler().dbPut(message.getMessage(), message.getID());
                     for (PrintWriter writer : writers) {
                     	//this will write a duplicate back to the sender.
                     	//fix this later :P
