@@ -10,16 +10,14 @@ public class DBwrangler {
 	private static DBwrangler db;
 	private static Connection conn;
 	
-	private DBwrangler(){
-		db = new DBwrangler();
-		init();
-	}
+//	private DBwrangler(){
+//		//init();
+//	}
 	
 	public static DBwrangler getWrangler(){
-		if (db == null){
-			new DBwrangler();
+		if (db != null){
 			return db;
-		} else return db;
+		} else return new DBwrangler();
 	}
 	
 	private static void init(){

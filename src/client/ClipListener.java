@@ -2,9 +2,19 @@ package client;
 
 import java.awt.*;
 import java.awt.datatransfer.*;
+import java.io.PrintWriter;
 
 public class ClipListener extends Thread implements ClipboardOwner{
 	Clipboard board = Toolkit.getDefaultToolkit().getSystemClipboard();
+	ClipManager manager;
+	PrintWriter out;
+	String id;
+	
+	public ClipListener(PrintWriter out, String id) {
+		manager = new ClipManager();
+		this.out = out;
+		this.id = id;
+	}
 
 	public void run() {  
 		
@@ -23,6 +33,7 @@ public class ClipListener extends Thread implements ClipboardOwner{
 
 	private void processContents(Transferable content) {
 		System.out.println("Processing: " + content);
+		out.println(id + "." + manager.getClipboardContents());
 	}
 
 	private void regainOwnership(Transferable content) {

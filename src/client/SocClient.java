@@ -14,7 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class SocClient {
 	
-	private ClipManager manager;
+//	private static ClipManager manager;
+//	private static PrintWriter out;
+//	private static String id;
 	//manager.getClipboardContents()
 	//manager.setClipboardContents()
     /**
@@ -25,7 +27,6 @@ public class SocClient {
      */
     public static void main(String[] args) throws IOException {
     	Scanner scanner = new Scanner(System.in);
-    	
         String serverAddress = JOptionPane.showInputDialog(
             "Enter IP Address of a machine that is\n" +
             "running the date service on port 9090:");
@@ -37,11 +38,13 @@ public class SocClient {
         System.out.println("Give us an ID!");
         String id = scanner.nextLine();
         out.println(id+".auth");
-        ClipListener cl = new ClipListener();
+        ClipListener cl = new ClipListener(out, id);
         cl.start();
         while (true) {
             String line = input.readLine();
             System.out.println(line);
         }
     }
+    
+    
 }
