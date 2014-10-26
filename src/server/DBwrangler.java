@@ -3,6 +3,7 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBwrangler {
@@ -37,6 +38,14 @@ public class DBwrangler {
 	
 	public void dbPut(String message, String id){
 		System.out.println("Let's pretend I stored " + message + " in the database");
+		Statement st;
+		try {
+			st = conn.createStatement();
+			int res = st.executeUpdate("INSERT INTO main(ID,CLIP,EPOCH) VALUES ( '" + id + "' , '" + message + "' , '" + System.currentTimeMillis() / 1000l + "')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

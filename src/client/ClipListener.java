@@ -10,6 +10,7 @@ public class ClipListener extends Thread implements ClipboardOwner{
 	PrintWriter out;
 	String id;
 	String last;
+	static Boolean ignore;
 	
 	public ClipListener(PrintWriter out, String id) {
 		manager = new ClipManager();
@@ -44,14 +45,18 @@ public class ClipListener extends Thread implements ClipboardOwner{
 		}
 
 	private void processContents(Transferable content) {
-		if (!manager.getClipboardContents().equals(last)){
+		if (!manager.getClipboardContents().equals(last) || ignore == false){
 		out.println(id + "." + manager.getClipboardContents());
 		last = manager.getClipboardContents();
-		}
+		} else ignore = false;
 	}
 
 	private void regainOwnership(Transferable content) {
 		board.setContents(content, this); 
+	}
+
+	public static void setIgnore() {
+		ignore = true;
 	}
 
 }
