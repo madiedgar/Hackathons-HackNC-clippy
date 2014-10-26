@@ -6,15 +6,11 @@ public class Message {
 	private String id;
 	
 	public Message(String message){
-		this.raw = message;
-		String[] temp = raw.split("[.]+");
-		if (temp.length == 2){
-			this.id = temp[0];
-			this.message= temp[1];
-		} else {
-			System.out.println("Message Formatting Error!");
-			System.out.println(raw);
-		}
+		int splitdex = message.indexOf('.', 0);
+		
+		this.id = message.substring(0,splitdex);
+		this.message = message.substring(splitdex + 1, message.length());
+		
 	}
 	
 	public String getMessage(){

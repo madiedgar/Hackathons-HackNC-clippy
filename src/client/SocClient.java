@@ -25,24 +25,22 @@ public class SocClient {
      * it serves.
      */
     public static void main(String[] args) throws IOException {
+    	String name = "clippy";
     	ClipManager manager = new ClipManager();
-    	Scanner scanner = new Scanner(System.in);
-        String serverAddress = JOptionPane.showInputDialog(
-            "Enter IP Address of a machine that is\n" +
-            "running the date service on port 9090:");
+        String serverAddress = "clippy.redspin.net";
+        String id = JOptionPane.showInputDialog("Pick an id number");
         Socket s = new Socket(serverAddress, 9090);
         
         BufferedReader input =
             new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-        System.out.println("Give us an ID!");
-        String id = scanner.nextLine();
+        System.out.println("[" + System.currentTimeMillis() / 1000l + "] Client connected to " + name + " as " + id);
         out.println(id+".auth");
         ClipListener cl = new ClipListener(out, id);
         cl.start();
         while (true) {
             String line = input.readLine();
-            System.out.println(line);
+            System.out.println("[" + System.currentTimeMillis() / 1000l + "] " + line);
             manager.setClipboardContents(line);
         }
     }

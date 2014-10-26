@@ -21,8 +21,7 @@ public class ClipListener extends Thread implements ClipboardOwner{
 	public void run() {  
 		
 		Transferable trans = board.getContents(this);  
-		regainOwnership(trans);  
-		System.out.println("Listening to board...");  
+		regainOwnership(trans);   
 		while(true) {}  
 	} 
 
