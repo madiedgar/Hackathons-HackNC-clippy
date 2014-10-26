@@ -18,7 +18,6 @@ public class BoardListener extends ClipboardHandler{
 		try {
 			Thread.sleep(10000000L);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
