@@ -24,12 +24,23 @@ public class ClipListener extends Thread implements ClipboardOwner{
 		while(true) {}  
 	} 
 
-	@Override
-	public void lostOwnership(Clipboard clipboard, Transferable contents) {
-		Transferable content = board.getContents(this); //EXCEPTION  
-		processContents(content);  
-		regainOwnership(content);
-	}
+//	@Override
+//	public void lostOwnership(Clipboard clipboard, Transferable contents) {
+//		Transferable content = board.getContents(this); //EXCEPTION  
+//		processContents(content);
+//		regainOwnership(content);
+//	}
+	
+	public void lostOwnership(Clipboard c, Transferable t) {  
+		  try {  
+		    this.sleep(20);  
+		  } catch(Exception e) {  
+		    System.out.println("Exception: " + e);  
+		  }  
+		  Transferable contents = board.getContents(this);  
+		  processContents(contents);  
+		  regainOwnership(contents);  
+		}
 
 	private void processContents(Transferable content) {
 		System.out.println("Processing: " + content);

@@ -14,7 +14,7 @@ public class ClientGroup {
 
 	public List<PrintWriter> getWriters() {
 		// TODO Auto-generated method stub
-		return null;
+		return writers;
 	}
 
 	public void add(PrintWriter out) {
