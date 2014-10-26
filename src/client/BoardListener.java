@@ -22,5 +22,10 @@ public class BoardListener extends ClipboardHandler{
 		}
 	}
 
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
