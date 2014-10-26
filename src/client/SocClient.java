@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +25,7 @@ public class SocClient {
      * it serves.
      */
     public static void main(String[] args) throws IOException {
+    	ClipManager manager = new ClipManager();
     	Scanner scanner = new Scanner(System.in);
         String serverAddress = JOptionPane.showInputDialog(
             "Enter IP Address of a machine that is\n" +
@@ -43,6 +43,7 @@ public class SocClient {
         while (true) {
             String line = input.readLine();
             System.out.println(line);
+            manager.setClipboardContents(line);
         }
     }
     
