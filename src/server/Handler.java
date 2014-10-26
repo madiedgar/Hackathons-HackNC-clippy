@@ -50,7 +50,7 @@ class Handler extends Thread {
                 }
                 message = new Message(input);
                 id = message.getID();
-                System.out.println(id);
+                System.out.println(id + "Has contacted the server.");
                 ClientGroup g = HandlerHelper.findGroup(id);
                 //do this when a message is received
                 if (message.getMessage().equals("auth")){

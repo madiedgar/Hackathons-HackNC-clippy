@@ -2,8 +2,12 @@ package client;
 
 public final class ClientHelper {
 	
+	public boolean ignore; 
+	public String last;
+	private static ClientHelper helper;
+	
 	private ClientHelper(){
-		ignore = false;
+
 	}
 	public static ClientHelper getHelper(){
 		if (helper == null){
@@ -12,14 +16,17 @@ public final class ClientHelper {
 		} else return helper;
 	}
 	
-	public boolean ignore;
-	private static ClientHelper helper;
-	
 	public boolean getIgnore(){
 		return ignore;
 	}
 	public void setIg(boolean boo){
 		ignore = boo;
+	}
+	public void setLast(String last){
+		this.last = last;
+	}
+	public String getLast(){
+		return last;
 	}
 
 }

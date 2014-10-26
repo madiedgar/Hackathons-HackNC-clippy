@@ -37,7 +37,7 @@ public class DBwrangler {
 	  }
 	
 	public void dbPut(String message, String id){
-		System.out.println("Let's pretend I stored " + message + " in the database");
+		//System.out.println("Let's pretend I stored " + message + " in the database");
 		Statement st;
 		try {
 			st = conn.createStatement();
